@@ -545,6 +545,7 @@ GameObject:
   - component: {fileID: 898602561}
   - component: {fileID: 898602560}
   - component: {fileID: 898602562}
+  - component: {fileID: 898602563}
   m_Layer: 0
   m_Name: Network Manager
   m_TagString: Untagged
@@ -587,9 +588,9 @@ MonoBehaviour:
   m_MaxConnectAttempts: 60
   m_DisconnectTimeoutMS: 30000
   ConnectionData:
-    Address: 127.0.0.1
+    Address: 192.168.1.20
     Port: 7777
-    ServerListenAddress: 127.0.0.1
+    ServerListenAddress: 192.168.1.20
   DebugSimulator:
     PacketDelayMS: 0
     PacketJitterMS: 0
@@ -639,11 +640,25 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 898602558}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2f1ca0cf5b567e948a08deaaf1044609, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &898602563
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 898602558}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b39d40241d5ae024a950497d9d76401b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DrawOffset: {x: 10, y: 10}
+  LabelColor: {r: 0, g: 0, b: 0, a: 1}
 --- !u!1 &967998196
 GameObject:
   m_ObjectHideFlags: 0
