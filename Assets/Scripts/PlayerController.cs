@@ -6,12 +6,20 @@ using Unity.Netcode;
 /// <summary>
 /// Just a crappy character controller for the video
 /// </summary>
-public class PlayerController : MonoBehaviour
+public class PlayerController : NetworkBehaviour
 {
     public float moveSpeed = 5f;
     public float rotationSpeed = 720f; // Degrees per second
 
     private Rigidbody rb;
+
+    public override void OnNetworkSpawn()
+    {
+        if (!IsOwner)
+        {
+            this.enabled = false;
+        }
+    }
 
     void Start()
     {
