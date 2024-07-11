@@ -15,6 +15,11 @@ public class PlayerController : NetworkBehaviour
 
     public override void OnNetworkSpawn()
     {
+
+        if ((IsOwner && !IsHost) || (!IsOwner && IsHost))
+        {
+            this.gameObject.SetActive(false);
+        }
         if (!IsOwner)
         {
             this.enabled = false;

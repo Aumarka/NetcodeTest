@@ -6,9 +6,6 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/TarodevTutorialSample.unity
-    guid: c7084bbf97daf0c459be3f8ca53f4af7
-  - enabled: 1
-    path: Assets/Scenes/SampleScene.unity
-    guid: 99c9720ab356a0642a771bea13969a05
+    path: Assets/Scenes/HostScene.unity
+    guid: 665b5d3e3bd74c544b89af5ee782d876
   m_configObjects: {}
