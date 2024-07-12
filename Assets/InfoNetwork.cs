@@ -6,9 +6,9 @@ using UnityEngine;
 public class InfoNetwork : NetworkBehaviour
 {
     private readonly NetworkVariable<InfoNetworkData> _infoState = new(writePerm: NetworkVariableWritePermission.Owner);
-    private InfoManager _infoManager;
+    public InfoManager _infoManager;
 
-    private void Start()
+    private void Awake()
     {
         _infoManager = GetComponent<InfoManager>();
     }
@@ -20,32 +20,32 @@ public class InfoNetwork : NetworkBehaviour
         {
             _infoState.Value = new InfoNetworkData()
             {
-                RubbishName = _infoManager.currentRubbish
+                RubbishID = _infoManager.currentRubbishID
             };
         }
         else
         {
-            _infoManager.currentRubbish = _infoState.Value.RubbishName;
+            _infoManager.currentRubbishID = _infoState.Value.RubbishID;
         }
     }
 
     struct InfoNetworkData : INetworkSerializable
     {
-        private string _rubbishName;
+        private int _rubbishID;
 
-        internal string RubbishName
+        internal int RubbishID
         {
-            get => _rubbishName;
+            get => _rubbishID;
 
             set
             {
-                _rubbishName = value;
+                _rubbishID = value;
             }
         }
 
         public void NetworkSerialize<T>(BufferSerializer<T> serializer) where T : IReaderWriter
         {
-            serializer.SerializeValue(ref _rubbishName);
+            serializer.SerializeValue(ref _rubbishID);
         }
     }
 }

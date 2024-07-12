@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class InfoManager : NetworkBehaviour
 {
-    public string currentRubbish;
+    public int currentRubbishID;
 
     public override void OnNetworkSpawn()
     {
@@ -21,8 +21,8 @@ public class InfoManager : NetworkBehaviour
         }
     }
 
-    public void ChangeCurrentRubbish(string newRubbish)
+    public void ChangeCurrentRubbish(int newRubbishID)
     {
-        currentRubbish = newRubbish;
+        currentRubbishID = newRubbishID;
     }
 }
