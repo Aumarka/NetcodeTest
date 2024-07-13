@@ -1,4 +1,6 @@
 using System;
+using System.Net.Sockets;
+using System.Net;
 using System.Runtime.CompilerServices;
 using Unity.Netcode;
 using Unity.Netcode.Transports.UTP;
@@ -60,7 +62,13 @@ public class NetworkManagerHud : MonoBehaviour
 
         GUILayout.BeginHorizontal();
 
-        m_ConnectAddress = GUILayout.TextField(m_ConnectAddress);
+        string localIP = GetLocalIPAddress();
+        if (localIP != null)
+        {
+            m_ConnectAddress = localIP;
+        }
+
+            m_ConnectAddress = GUILayout.TextField(m_ConnectAddress);
         m_PortString = GUILayout.TextField(m_PortString);
         if (ushort.TryParse(m_PortString, out ushort port))
         {
@@ -112,6 +120,27 @@ public class NetworkManagerHud : MonoBehaviour
         {
             m_NetworkManager.Shutdown();
         }
+    }
+
+    string GetLocalIPAddress()
+    {
+        try
+        {
+            var host = Dns.GetHostEntry(Dns.GetHostName());
+            foreach (var ip in host.AddressList)
+            {
+                if (ip.AddressFamily == AddressFamily.InterNetwork)
+                {
+                    return ip.ToString();
+                }
+            }
+        }
+        catch (System.Exception ex)
+        {
+            Debug.LogError("Exception caught while retrieving IP address: " + ex.Message);
+        }
+
+        return null;
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]

@@ -26,6 +26,11 @@ public class InfoManager : NetworkBehaviour
         SceneManager.sceneLoaded += InitaliseInfoManager;
     }
 
+    private void OnDisable()
+    {
+        SceneManager.sceneLoaded -= InitaliseInfoManager;
+    }
+
     public override void OnNetworkSpawn()
     {
         InitaliseInfoManager();
@@ -61,7 +66,11 @@ public class InfoManager : NetworkBehaviour
         // Game instance is the owner but not the host or if Game Instance is not the owner but is the host
         if ((IsOwner && !IsHost) || (!IsOwner && IsHost))
         {
-            this.gameObject.SetActive(false);
+            if (this)
+            {
+                this.gameObject.SetActive(false);
+            }
+            
         }
 
         //Link's hosts info manager object to the host manager

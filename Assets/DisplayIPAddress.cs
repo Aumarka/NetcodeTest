@@ -26,6 +26,7 @@ public class DisplayIPAddress : MonoBehaviour
             {
                 if (ip.AddressFamily == AddressFamily.InterNetwork)
                 {
+                    Debug.Log(ip.ToString());
                     return ip.ToString();
                 }
             }
