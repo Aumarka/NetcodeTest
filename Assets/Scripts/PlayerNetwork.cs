@@ -25,6 +25,21 @@ public class PlayerNetwork : NetworkBehaviour
         {
             transform.position = Vector3.SmoothDamp(transform.position, _netState.Value.Position, ref _vel, _cheapInterpolationTime);
         }
+
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            if (IsClient && IsOwner && !IsServer)
+            {
+                Debug.Log("Attempting To Send Game Info To Host");
+                SendGameInfoToHostServerRPC();
+            }
+        }
+    }
+
+    [ServerRpc]
+    public void SendGameInfoToHostServerRPC()
+    {
+        Debug.Log("Client is interacting with Host Player Object");
     }
 
     struct PlayerNetworkData : INetworkSerializable

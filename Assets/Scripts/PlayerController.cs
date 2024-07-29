@@ -16,14 +16,14 @@ public class PlayerController : NetworkBehaviour
     public override void OnNetworkSpawn()
     {
 
-        if ((IsOwner && !IsHost) || (!IsOwner && IsHost))
-        {
-            this.gameObject.SetActive(false);
-        }
-        if (!IsOwner)
-        {
-            this.enabled = false;
-        }
+        //if ((IsOwner && !IsHost) || (!IsOwner && IsHost))
+        //{
+        //    this.gameObject.SetActive(false);
+        //}
+        //if (!IsOwner)
+        //{
+        //    this.enabled = false;
+        //}
     }
 
     void Start()
@@ -54,5 +54,9 @@ public class PlayerController : NetworkBehaviour
             Quaternion targetRotation = Quaternion.LookRotation(movement, Vector3.up);
             rb.rotation = Quaternion.RotateTowards(rb.rotation, targetRotation, rotationSpeed * Time.deltaTime);
         }
+
+
     }
+
+
 }
