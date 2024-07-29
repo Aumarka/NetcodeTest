@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using Unity.Netcode;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -8,6 +9,14 @@ public class PlayerNetwork : NetworkBehaviour
 {
     private readonly NetworkVariable<PlayerNetworkData> _netState = new(writePerm: NetworkVariableWritePermission.Owner);
 
+    public TMP_Text gameText;
+    public int calls = 0;
+
+    private void Start()
+    {
+        gameText = GameObject.FindGameObjectWithTag("GameText").GetComponent<TMP_Text>();
+        calls = 0;
+    }
 
     private Vector3 _vel;
     [SerializeField] private float _cheapInterpolationTime = 0.1f;
@@ -40,6 +49,7 @@ public class PlayerNetwork : NetworkBehaviour
     public void SendGameInfoToHostServerRPC(string clientName)
     {
         Debug.Log($"Client '{clientName}' is interacting with Host");
+        gameText.text = $"Client '{clientName}' is interacting with Host + Call: " + calls;
     }
 
     struct PlayerNetworkData : INetworkSerializable

@@ -6,6 +6,7 @@ TagManager:
   tags:
   - ClientManager
   - HostManager
+  - GameText
   layers:
   - Default
   - TransparentFX
