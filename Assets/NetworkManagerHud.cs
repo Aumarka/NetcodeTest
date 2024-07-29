@@ -24,8 +24,6 @@ public class NetworkManagerHud : MonoBehaviour
 
     public Color LabelColor = Color.black;
 
-    public bool useLocalIP;
-
     void Awake()
     {
         // Only cache networking manager but not transport here because transport could change anytime.
@@ -63,9 +61,6 @@ public class NetworkManagerHud : MonoBehaviour
         GUILayout.EndHorizontal();
 
         GUILayout.BeginHorizontal();
-
-        string localIP = GetLocalIPAddress();
-
 
         m_ConnectAddress = GUILayout.TextField(m_ConnectAddress);
         m_PortString = GUILayout.TextField(m_PortString);
@@ -119,27 +114,6 @@ public class NetworkManagerHud : MonoBehaviour
         {
             m_NetworkManager.Shutdown();
         }
-    }
-
-    string GetLocalIPAddress()
-    {
-        try
-        {
-            var host = Dns.GetHostEntry(Dns.GetHostName());
-            foreach (var ip in host.AddressList)
-            {
-                if (ip.AddressFamily == AddressFamily.InterNetwork)
-                {
-                    return ip.ToString();
-                }
-            }
-        }
-        catch (System.Exception ex)
-        {
-            Debug.LogError("Exception caught while retrieving IP address: " + ex.Message);
-        }
-
-        return null;
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
