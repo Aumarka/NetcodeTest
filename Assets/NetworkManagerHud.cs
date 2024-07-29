@@ -24,6 +24,8 @@ public class NetworkManagerHud : MonoBehaviour
 
     public Color LabelColor = Color.black;
 
+    public bool useLocalIP;
+
     void Awake()
     {
         // Only cache networking manager but not transport here because transport could change anytime.
@@ -63,12 +65,9 @@ public class NetworkManagerHud : MonoBehaviour
         GUILayout.BeginHorizontal();
 
         string localIP = GetLocalIPAddress();
-        if (localIP != null)
-        {
-            m_ConnectAddress = localIP;
-        }
 
-            m_ConnectAddress = GUILayout.TextField(m_ConnectAddress);
+
+        m_ConnectAddress = GUILayout.TextField(m_ConnectAddress);
         m_PortString = GUILayout.TextField(m_PortString);
         if (ushort.TryParse(m_PortString, out ushort port))
         {
