@@ -31,15 +31,15 @@ public class PlayerNetwork : NetworkBehaviour
             if (IsClient && IsOwner && !IsServer)
             {
                 Debug.Log("Attempting To Send Game Info To Host");
-                SendGameInfoToHostServerRPC();
+                SendGameInfoToHostServerRPC(SystemInfo.deviceName);
             }
         }
     }
 
     [ServerRpc]
-    public void SendGameInfoToHostServerRPC()
+    public void SendGameInfoToHostServerRPC(string clientName)
     {
-        Debug.Log("Client is interacting with Host Player Object");
+        Debug.Log($"Client '{clientName}' is interacting with Host");
     }
 
     struct PlayerNetworkData : INetworkSerializable
